@@ -1,0 +1,22 @@
+{% assign results = page.path | split: "/" %}
+{% assign type = results[0] %}
+{% assign index = results[1] | replace : '.md', '' %}
+
+{% if index == 'category' %}
+<div class="operations">
+    <a href="../">选本</a>
+</div>
+{% elsif index != '' %}
+{% assign index = index | plus : 0 %}
+<div class="operations">
+    <a href="./category.html">概述</a>
+    {% if index > 1 %}
+    <a href="./{{ index | minus : 1 }}.html">上回</a>
+    {% endif %}
+    {% if type == 'zpb' and index < 80 %}
+    <a href="./{{ index | plus : 1 }}.html">下回</a>
+    {% elsif type == 'cgb' and index < 120 %}
+    <a href="./{{ index | plus : 1 }}.html">下回</a>
+    {% endif %}
+</div>
+{% endif %}
